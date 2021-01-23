@@ -34,47 +34,36 @@ Implement a game rest functionality, so that the player can make a new guess!
 4. Also restore the original background color and number background width
 */
 
-function guessGameDefault() { // The default range is from 0 -> 100
-
-    let number = Math.trunc(Math.random() * 100);
-
-    console.log("Guessing game | Range [0 - 100]");
-    do {
-        let value = prompt("Guess my number"); // Prompt here seems not working. value get nothing
-
-        if (value < 0 || value > 100) console.log("Out of range.");
-        else {
-            if (value > number)
-                console.log("Too high!");
-            else if (value < number)
-                console.log("Too low!");
-            else
-                console.log("You found my number!");
-        }
-    } while (value != number);
-}
-
-function guessGameRange() { // In case we need to select a range for the game
-
-    let number = Math.trunc(Math.random() * 100);
-
-    do {
-        let value = prompt("Guess my number");
-
-        if (value < 0 || value > 100) console.log("Out of range.");
-
+function guessGameDefault(value, number) { // The default range is from 0 -> 100
+    console.log(`Value: ${value} - Number: ${number}`);
+    if (value < 0 || value > 100)
+        return "Out of range.";
+    else {
         if (value > number)
-            console.log("Too high!");
+            return "Too high!";
         else if (value < number)
-            console.log("Too low!");
+            return "Too low!";
         else
-            console.log("You found my number!");
-    } while (value != number && min >= max);
+            return "You found my number!";
+    }
 }
 
-function isEmpty(value){ // I just wrote it
-    return value === "";
+
+function generateNumber() {
+    return Math.trunc(Math.random() * 100);
 }
+
+const number = generateNumber(); // 
+
+document.querySelector("#check-button").addEventListener("click", function getInput() {
+    let value = Number(document.querySelector("#input-number").value);
+    let msg = guessGameDefault(value, number);
+
+    document.querySelector(".guess-indicator").textContent = msg;
+
+})
+
+
 
 
 
