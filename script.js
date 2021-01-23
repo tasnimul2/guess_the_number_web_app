@@ -61,7 +61,7 @@ function guessGameRange() { // In case we need to select a range for the game
     do {
         let value = prompt("Guess my number");
 
-        if (value < 0 || value > 100) console.log("Out of range.");
+        if (value < 0 || value >= 100) console.log("Out of range.");
 
         if (value > number)
             console.log("Too high!");
