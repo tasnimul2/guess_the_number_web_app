@@ -48,7 +48,6 @@ function guessGameDefault(value, number) { // The default range is from 0 -> 100
     }
 }
 
-
 function generateNumber() {
     return Math.trunc(Math.random() * 100);
 }
