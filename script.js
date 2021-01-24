@@ -90,6 +90,7 @@ document.querySelector("#check-button").addEventListener("click", function getIn
             document.querySelector("#display-box-text").textContent = `${value}`;
             document.querySelector("#display-box").style.backgroundColor = "red";
             document.querySelector("body").style.background = "linear-gradient(to right top, #88f797, #f7f6ad)";
+            document.querySelector("body").style.color = "black";
         }
         document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
     }
