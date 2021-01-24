@@ -87,6 +87,9 @@ document.querySelector("#check-button").addEventListener("click", function getIn
 
         if (value === number) {
             highscore = getHighscore(msgAndScore[1]); // In case the number is guessed right then we update the highscore.
+            document.querySelector("#display-box-text").textContent = `${value}`;
+            document.querySelector("#display-box").style.backgroundColor = "red";
+            document.querySelector("body").style.background = "linear-gradient(to right top, #88f797, #f7f6ad)";
         }
         document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
     }
