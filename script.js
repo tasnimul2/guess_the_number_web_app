@@ -34,18 +34,19 @@ Implement a game rest functionality, so that the player can make a new guess!
 4. Also restore the original background color and number background width
 */
 
-function guessGameDefault(value, number, defaultScore) { // The default range is from 0 -> 100
-    console.log(`Value: ${value} - Number: ${number} - Score: ${defaultScore}`);
-    let score = defaultScore;
+function guessGameDefault(value, number, score) { // The default range is from 0 -> 100
+    console.log(`Value: ${value} - Number: ${number} - Score: ${score}`);
     if (value < 0 || value > 100)
         return "Out of range.";
     else {
         if (value > number) {
-            return ["Too high!", score--];
+            score--;
+            return "Too high!";
         } else if (value < number) {
-            return ["Too low!", score--];
+            score--;
+            return "Too low!";
         } else
-            return ["You found my number!", score];
+            return "You found my number!";
     }
 }
 
@@ -61,16 +62,14 @@ const number = generateNumber();
 
 document.querySelector("#check-button").addEventListener("click", function getInput() {
     let value = Number(document.querySelector("#input-number").value);
-    let defaultScore = 10;
-    let msgAndScore = guessGameDefault(value, number, defaultScore);
+    let score = 10;
+    let msg = guessGameDefault(value, number, score);
 
-    console.log(`Value: ${value} - Number: ${number} - Score: ${defaultScore}`);
-
-    document.querySelector(".guess-indicator").textContent = msgAndScore[0];
+    document.querySelector(".guess-indicator").textContent = msg;
 
     if (value === number) {
-        document.querySelector(".score").textContent =
-        `${document.querySelector(".score").textContent} ${ msgAndScore[1] }`;
+        document.querySelector("score").textContent =
+        `${document.querySelector("score").textContent} ${ score }`;
     }
 
 })
