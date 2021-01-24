@@ -34,17 +34,18 @@ Implement a game rest functionality, so that the player can make a new guess!
 4. Also restore the original background color and number background width
 */
 
-function guessGameDefault(value, number) { // The default range is from 0 -> 100
-    console.log(`Value: ${value} - Number: ${number}`);
+function guessGameDefault(value, number, defaultScore) { // The default range is from 0 -> 100
+    console.log(`Value: ${value} - Number: ${number} - Score: ${defaultScore}`);
+    let score = defaultScore;
     if (value < 0 || value > 100)
         return "Out of range.";
     else {
-        if (value > number)
-            return "Too high!";
-        else if (value < number)
-            return "Too low!";
-        else
-            return "You found my number!";
+        if (value > number) {
+            return ["Too high!", score--];
+        } else if (value < number) {
+            return ["Too low!", score--];
+        } else
+            return ["You found my number!", score];
     }
 }
 
@@ -52,13 +53,25 @@ function generateNumber() {
     return Math.trunc(Math.random() * 100);
 }
 
-const number = generateNumber(); // 
+const number = generateNumber();
+
+/* Note for you guys: For now it seems that even if there is not input the value = 0. 
+** So let work on it for now. We'll try to fix this later or just leave it like that
+** if we cannot figure it out. */
 
 document.querySelector("#check-button").addEventListener("click", function getInput() {
     let value = Number(document.querySelector("#input-number").value);
-    let msg = guessGameDefault(value, number);
+    let defaultScore = 10;
+    let msgAndScore = guessGameDefault(value, number, defaultScore);
 
-    document.querySelector(".guess-indicator").textContent = msg;
+    console.log(`Value: ${value} - Number: ${number} - Score: ${defaultScore}`);
+
+    document.querySelector(".guess-indicator").textContent = msgAndScore[0];
+
+    if (value === number) {
+        document.querySelector(".score").textContent =
+        `${document.querySelector(".score").textContent} ${ msgAndScore[1] }`;
+    }
 
 })
 
