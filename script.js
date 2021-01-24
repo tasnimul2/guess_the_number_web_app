@@ -35,41 +35,60 @@ Implement a game rest functionality, so that the player can make a new guess!
 */
 
 function guessGameDefault(value, number, score) { // The default range is from 0 -> 100
-    console.log(`Value: ${value} - Number: ${number} - Score: ${score}`);
-    if (value < 0 || value > 100)
-        return "Out of range.";
-    else {
-        if (value > number) {
-            score--;
-            return "Too high!";
-        } else if (value < number) {
-            score--;
-            return "Too low!";
-        } else
-            return "You found my number!";
-    }
+    console.log(`Value: ${value} - Number: ${number} - Score: ${score}`); // all console.log you will see are just to have a visual on the data
+
+    if (value > number) // if the user input is too high then return an array with the message and the score decreasing
+        return ["Too high!", score -= 1];
+    else if (value < number) // if the user input is too low then return an array with the message and the score decreasing
+        return ["Too low!", score -= 1];
+    else // if guessed right then return the message with the most recent score.
+        return ["You found my number!", score];
 }
 
-function generateNumber() {
+function generateNumber() { // This method will generate the number to guess.
     return Math.trunc(Math.random() * 100);
 }
 
-const number = generateNumber();
+function getHighscore(score) { // This method will check if the highscore is still greater than the score at the end of the game.
+    return score > highscore ? score : highscore;
+}
+
+const number = generateNumber(); // The number generated will be assigned to number and will stay unchaged until the game is reset.
+
+let msgAndScore = ["", 10]; // This array will hold the messages and the default score (10).
+
+let highscore = 0; // The high score when the page is opened.
+
+const defaultTextScoreContent = document.querySelector(".score").textContent; // We keep the original content of the element for further use.
+
+const defaultHighscoreContent = document.querySelector(".highscore").textContent; // We keep the original content of the element for further use.
+
+document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // We set up a default display with the value next to it. we (I) don't want to do extra work for now :( 
+
+document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Same as the above instruction.
 
 /* Note for you guys: For now it seems that even if there is not input the value = 0. 
 ** So let work on it for now. We'll try to fix this later or just leave it like that
 ** if we cannot figure it out. */
 
 document.querySelector("#check-button").addEventListener("click", function getInput() {
-    let value = Number(document.querySelector("#input-number").value);
-    let score = 10;
-    let msg = guessGameDefault(value, number, score);
+    let value = Number(document.querySelector("#input-number").value); // Get the value from the user
 
-    document.querySelector(".guess-indicator").textContent = msg;
+    if (value < 0 || value > 100) { // If the value is not in the range then display the message "Out of range"
+        document.querySelector(".guess-indicator").textContent = "Out of range!";
+    } else {
+        msgAndScore = guessGameDefault(value, number, msgAndScore[1]); // the method return an array that contains the message and the score.
 
-    if (value === number) {
-        document.querySelector("score").textContent =
-        `${document.querySelector("score").textContent} ${ score }`;
+        console.log(msgAndScore[1]);
+
+        document.querySelector(".guess-indicator").textContent = msgAndScore[0]; // Replace the current guess indicator textContent with the message we got from the method guessGameDefault()
+
+        document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // Update the previous score with the new score got from the guessGameDefault()
+
+        if (value === number) {
+            highscore = getHighscore(msgAndScore[1]); // In case the number is guessed right then we update the highscore.
+        }
+        document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
     }
 
 })
