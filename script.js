@@ -67,6 +67,13 @@ document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msg
 
 document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Same as the above instruction.
 
+function disableCheckButton() {
+    document.getElementById("check-button").disabled = true;
+    document.getElementById("check-button").style.backgroundColor = "rgb(148, 148, 148)";
+    document.getElementById("check-button").style.border = "none";
+    document.getElementById("check-button").style.color = "rgb(100, 100, 100)";
+}
+
 /* Note for you guys: For now it seems that even if there is not input the value = 0. 
 ** So let work on it for now. We'll try to fix this later or just leave it like that
 ** if we cannot figure it out. */
@@ -91,6 +98,7 @@ document.querySelector("#check-button").addEventListener("click", function getIn
             document.querySelector("#display-box").style.backgroundColor = "red";
             document.querySelector("body").style.background = "linear-gradient(to right top, #88f797, #f7f6ad)";
             document.querySelector("body").style.color = "black";
+            disableCheckButton();
         }
         document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
     }
