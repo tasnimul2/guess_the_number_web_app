@@ -126,7 +126,9 @@ document.querySelector("#check-button").addEventListener("click", function getIn
     // Also improving the UI.
 
 
-document.querySelector("#play-button").addEventListener
+document.querySelector("#play-button").addEventListener("click", function() {
+    
+})
 
 
 
