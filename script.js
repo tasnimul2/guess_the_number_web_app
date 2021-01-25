@@ -93,12 +93,9 @@ document.getElementById("play-button").addEventListener("click", function resetP
     document.querySelector(".guess-indicator").textContent = 'Waiting for a number...';
     document.querySelector(".score").textContent = `${defaultTextScoreContent} 10`; // needs to be fixed
     document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // this one works fine
-<<<<<<< HEAD
-=======
     effectOnPage('white','linear-gradient(to right top,#e588f7, #f7c3ad)','white');
 
    
->>>>>>> dae4768d34fa43e2dce9eeedd577cf16c69fc463
 })
 
 /* Note for you guys: For now it seems that even if there is not input, the value = 0. 
