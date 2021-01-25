@@ -34,6 +34,28 @@ Implement a game rest functionality, so that the player can make a new guess!
 4. Also restore the original background color and number background width
 */
 
+//The below section is to initialize value when the page loads
+
+let number = generateNumber(); // The number generated will be assigned to number and will stay unchaged until the game is reset.
+
+let msgAndScore = ["", 10]; // This array will hold the messages and the default score (10).
+
+let highscore = 0, value = 0; // The high score when the page is opened.
+
+const defaultTextScoreContent = document.querySelector(".score").textContent; // We keep the original content of the element for further use.
+
+const defaultHighscoreContent = document.querySelector(".highscore").textContent; // We keep the original content of the element for further use.
+
+const defaultGuessIndicatorContent = document.querySelector(".guess-indicator").textContent; // We keep the original content of the element for further use.
+
+document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // We set up a default display with the value next to it. we (I) don't want to do extra work for now :( 
+
+document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Same as the above instruction.
+
+document.getElementById("input-number").value = 0;
+
+// The below section are function used to run the games
+
 function guessGameDefault(value, number, score) { // The default range is from 0 -> 100
     console.log(`Value: ${value} - Number: ${number} - Score: ${score}`); // all console.log you will see are just to have a visual on the data
 
@@ -53,63 +75,47 @@ function getHighscore(score) { // This method will check if the highscore is sti
     return score > highscore ? score : highscore;
 }
 
-const number = generateNumber(); // The number generated will be assigned to number and will stay unchaged until the game is reset.
-
-let msgAndScore = ["", 10]; // This array will hold the messages and the default score (10).
-
-let highscore = 0; // The high score when the page is opened.
-
-const defaultTextScoreContent = document.querySelector(".score").textContent; // We keep the original content of the element for further use.
-
-const defaultHighscoreContent = document.querySelector(".highscore").textContent; // We keep the original content of the element for further use.
-
-document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // We set up a default display with the value next to it. we (I) don't want to do extra work for now :( 
-
-document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Same as the above instruction.
 
 function defautlInput() {
     document.querySelector("#input-number").value = 0; // reset the input value to zero
 }
-/*
-function disableCheckButton() {
-    document.getElementById("check-button").disabled = true;
-    document.getElementById("check-button").style.backgroundColor = "rgb(148, 148, 148)";
-    document.getElementById("check-button").style.border = "none";
-    document.getElementById("check-button").style.color = "rgb(100, 100, 100)";
+
+function disableCheckButton(isDisabled, backgroundColor, border, color) {
+    document.getElementById("check-button").disabled = isDisabled;
+    document.getElementById("check-button").style.backgroundColor = backgroundColor;
+    document.getElementById("check-button").style.border = border;
+    document.getElementById("check-button").style.color = color;
 }
-*/
 
 function effectOnPage(displayBoxColor, bodyBackground, bodyColor) {
     document.querySelector("#display-box").style.backgroundColor = displayBoxColor;
     document.querySelector("body").style.background = bodyBackground;
     document.querySelector("body").style.color = bodyColor;
 }
- 
+
+function resetPageStyle() {
+    number = generateNumber();
+    defautlInput();
+    msgAndScore = ["", 10];
+    effectOnPage("white", "linear-gradient(to right top,#e588f7, #f7c3ad)", "white");
+    disableCheckButton(false, "lightblue", "2px solid yellow", "white");
+    document.querySelector(".guess-indicator").textContent = defaultGuessIndicatorContent;
+    document.querySelector("#display-box-text").textContent = "?";
+    document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // We set up a default display with the value next to it. we (I) don't want to do extra work for now :( 
+}
+
+
+// This section below are Actions.
+
 document.getElementById("play-button").addEventListener("click", function resetPage() {
-    console.log('game restarted!');
-    const number = generateNumber();
-    document.querySelector("#input-number").value = '';
-    document.querySelector("#display-box-text").textContent = '?';
-    document.querySelector(".guess-indicator").textContent = 'Waiting for a number...';
-    document.querySelector(".score").textContent = `${defaultTextScoreContent} 10`; // needs to be fixed
-    document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // this one works fine
-<<<<<<< HEAD
-=======
-    effectOnPage('white','linear-gradient(to right top,#e588f7, #f7c3ad)','white');
-
-   
->>>>>>> dae4768d34fa43e2dce9eeedd577cf16c69fc463
-})
-
-/* Note for you guys: For now it seems that even if there is not input, the value = 0. 
-** So let work on it for now. We'll try to fix this later or just leave it like that
-** if we cannot figure it out. */
+    resetPageStyle();
+});
 
 document.querySelector("#check-button").addEventListener("click", function getInput() { // Though not need I preffered naming the function.
-    let value = Number(document.querySelector("#input-number").value); // Get the value from the user
+    value = Number(document.querySelector("#input-number").value); // Get the value from the user
 
     if (value < 0 || value > 100) { // If the value is not in the range then display the message "Out of range"
-        document.querySelector(".guess-indicator").textContent = "Out of range!👀";
+        document.querySelector(".guess-indicator").textContent = "Out of range!";
     } else {
         msgAndScore = guessGameDefault(value, number, msgAndScore[1]); // the method return an array that contains the message and the score.
 
@@ -121,28 +127,32 @@ document.querySelector("#check-button").addEventListener("click", function getIn
 
         if (value === number) {
             highscore = getHighscore(`${msgAndScore[1]}`); // In case the number is guessed right then we update the highscore.
-            document.querySelector("#display-box-text").textContent = `${value}`;
+            document.querySelector("#display-box-text").textContent = `${number}`;
             effectOnPage("#20FFEB", "linear-gradient(to right top, #88f797, #f7f6ad)", "#000"); // set the function effectOnPage() just not to oveload the this getInput() function
-            defautlInput(); // At the end of the game we could reset the input value to zero.
+            disableCheckButton(true, "rgb(148, 148, 148)", "none", "rgb(100, 100, 100)"); //Same as above
+            // defautlInput(); // At the end of the game we could reset the input value to zero.
         }
 
         if (msgAndScore[1] === 0) {
             document.querySelector(".guess-indicator").textContent = "💥You've lost😥";
-            document.querySelector("#display-box-text").textContent = `${value}`;
+            document.querySelector("#display-box-text").textContent = `${number}`;
             effectOnPage("#FF77F3", "linear-gradient(to right top, #FFDF0F, #FF09CC)", "#fff");
-            disableCheckButton();
-            defautlInput(); // At the end of the game we could reset the input value to zero.
+            disableCheckButton(true, "rgb(148, 148, 148)", "none", "rgb(100, 100, 100)");
+            // defautlInput(); // At the end of the game we could reset the input value to zero.
         }
 
         document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
     }
-})
-
 
     /* The next step is to add the "Game lost!" and play again without changing the highscore unless the page 
     ** is refreshed. We need to use a method to reinitalize the targeted variables*/
 
+
     // Also improving the UI.
+
+});
+
+
 
 
 
