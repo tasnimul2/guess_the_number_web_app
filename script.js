@@ -96,7 +96,7 @@ document.querySelector("#check-button").addEventListener("click", function getIn
     let value = Number(document.querySelector("#input-number").value); // Get the value from the user
 
     if (value < 0 || value > 100) { // If the value is not in the range then display the message "Out of range"
-        document.querySelector(".guess-indicator").textContent = "Out of range!";
+        document.querySelector(".guess-indicator").textContent = "Out of range!👀";
     } else {
         msgAndScore = guessGameDefault(value, number, msgAndScore[1]); // the method return an array that contains the message and the score.
 
@@ -124,16 +124,16 @@ document.querySelector("#check-button").addEventListener("click", function getIn
 
         document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
     }
-
-    /* The next step is to add the "Game lost!" and play again without changing the highscore unless the page 
-    ** is refreshed. We need to use a method to reinitalize the targeted variables*/
-
-
-    // Also improving the UI.
-
 })
 
 
+    /* The next step is to add the "Game lost!" and play again without changing the highscore unless the page 
+    ** is refreshed. We need to use a method to reinitalize the targeted variables*/
+   
+    // Also improving the UI.
+
+
+document.querySelector("#play-button").addEventListener
 
 
 
