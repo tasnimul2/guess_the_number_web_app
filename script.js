@@ -70,13 +70,14 @@ document.querySelector(".highscore").textContent = `${defaultHighscoreContent} $
 function defautlInput() {
     document.querySelector("#input-number").value = 0; // reset the input value to zero
 }
-
+/*
 function disableCheckButton() {
     document.getElementById("check-button").disabled = true;
     document.getElementById("check-button").style.backgroundColor = "rgb(148, 148, 148)";
     document.getElementById("check-button").style.border = "none";
     document.getElementById("check-button").style.color = "rgb(100, 100, 100)";
 }
+*/
 
 function effectOnPage(displayBoxColor, bodyBackground, bodyColor) {
     document.querySelector("#display-box").style.backgroundColor = displayBoxColor;
@@ -99,9 +100,7 @@ document.getElementById("play-button").addEventListener("click", function resetP
     document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // needs to be fixed
     document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // this one works fine
 
-    function disableCheckButton(){ //can't reactivate it.
-        document.getElementById("#check-button").disabled = false; //checkbutton reactivate
-    }
+   
 })
 
 /* Note for you guys: For now it seems that even if there is not input, the value = 0. 
@@ -126,7 +125,6 @@ document.querySelector("#check-button").addEventListener("click", function getIn
             highscore = getHighscore(`${msgAndScore[1]}`); // In case the number is guessed right then we update the highscore.
             document.querySelector("#display-box-text").textContent = `${value}`;
             effectOnPage("#20FFEB", "linear-gradient(to right top, #88f797, #f7f6ad)", "#000"); // set the function effectOnPage() just not to oveload the this getInput() function
-            disableCheckButton(); //Same as above
             defautlInput(); // At the end of the game we could reset the input value to zero.
         }
 
