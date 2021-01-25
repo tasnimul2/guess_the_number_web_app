@@ -117,16 +117,16 @@ document.querySelector("#check-button").addEventListener("click", function getIn
 
         document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
     }
-
-    /* The next step is to add the "Game lost!" and play again without changing the highscore unless the page 
-    ** is refreshed. We need to use a method to reinitalize the targeted variables*/
-
-
-    // Also improving the UI.
-
 })
 
 
+    /* The next step is to add the "Game lost!" and play again without changing the highscore unless the page 
+    ** is refreshed. We need to use a method to reinitalize the targeted variables*/
+   
+    // Also improving the UI.
+
+
+document.querySelector("#play-button").addEventListener
 
 
 
