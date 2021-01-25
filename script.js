@@ -94,8 +94,6 @@ document.getElementById("play-button").addEventListener("click", function resetP
     document.querySelector(".score").textContent = `${defaultTextScoreContent} 10`;
     document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`;
     effectOnPage('white','linear-gradient(to right top,#e588f7, #f7c3ad)','white');
-
-   
 })
 
 /* Note for you guys: For now it seems that even if there is not input, the value = 0. 
