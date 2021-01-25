@@ -67,8 +67,9 @@ document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msg
 
 document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Same as the above instruction.
 
-document.querySelector("#input-number").setAttribute("value", "0"); // I thought this could set the default value to zero :/
-
+function defautlInput() {
+    document.querySelector("#input-number").value = 0; // reset the input value to zero
+}
 
 function disableCheckButton() {
     document.getElementById("check-button").disabled = true;
@@ -83,7 +84,11 @@ function effectOnPage(displayBoxColor, bodyBackground, bodyColor) {
     document.querySelector("body").style.color = bodyColor;
 }
 
-/* Note for you guys: For now it seems that even if there is not input the value = 0. 
+document.getElementById("play-button").addEventListener("click", function resetPage() {
+
+})
+
+/* Note for you guys: For now it seems that even if there is not input, the value = 0. 
 ** So let work on it for now. We'll try to fix this later or just leave it like that
 ** if we cannot figure it out. */
 
@@ -106,13 +111,15 @@ document.querySelector("#check-button").addEventListener("click", function getIn
             document.querySelector("#display-box-text").textContent = `${value}`;
             effectOnPage("#20FFEB", "linear-gradient(to right top, #88f797, #f7f6ad)", "#000"); // set the function effectOnPage() just not to oveload the this getInput() function
             disableCheckButton(); //Same as above
+            defautlInput(); // At the end of the game we could reset the input value to zero.
         }
 
-        if (msgAndScore[1] === 0){
-            document.querySelector(".guess-indicator").textContent = "💥You've lost😥" ;
+        if (msgAndScore[1] === 0) {
+            document.querySelector(".guess-indicator").textContent = "💥You've lost😥";
             document.querySelector("#display-box-text").textContent = `${value}`;
             effectOnPage("#FF77F3", "linear-gradient(to right top, #FFDF0F, #FF09CC)", "#fff");
             disableCheckButton();
+            defautlInput(); // At the end of the game we could reset the input value to zero.
         }
 
         document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
