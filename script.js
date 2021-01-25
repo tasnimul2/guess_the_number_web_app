@@ -38,11 +38,11 @@ function guessGameDefault(value, number, score) { // The default range is from 0
     console.log(`Value: ${value} - Number: ${number} - Score: ${score}`); // all console.log you will see are just to have a visual on the data
 
     if (value > number) // if the user input is too high then return an array with the message and the score decreasing
-        return ["Too high!", score -= 1];
+        return ["📈Too high!", score -= 1];
     else if (value < number) // if the user input is too low then return an array with the message and the score decreasing
-        return ["Too low!", score -= 1];
+        return ["📉Too low!", score -= 1];
     else // if guessed right then return the message with the most recent score.
-        return ["You found my number!", score];
+        return ["🎉You found my number!😎", score];
 }
 
 function generateNumber() { // This method will generate the number to guess.
@@ -67,6 +67,8 @@ document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msg
 
 document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Same as the above instruction.
 
+document.querySelector("#input-number").setAttribute("value", "0"); // I thought this could set the default value to zero :/
+
 
 function disableCheckButton() {
     document.getElementById("check-button").disabled = true;
@@ -75,17 +77,17 @@ function disableCheckButton() {
     document.getElementById("check-button").style.color = "rgb(100, 100, 100)";
 }
 
-function effectOnPage() {
-    document.querySelector("#display-box").style.backgroundColor = "red";
-    document.querySelector("body").style.background = "linear-gradient(to right top, #88f797, #f7f6ad)";
-    document.querySelector("body").style.color = "black";
+function effectOnPage(displayBoxColor, bodyBackground, bodyColor) {
+    document.querySelector("#display-box").style.backgroundColor = displayBoxColor;
+    document.querySelector("body").style.background = bodyBackground;
+    document.querySelector("body").style.color = bodyColor;
 }
 
 /* Note for you guys: For now it seems that even if there is not input the value = 0. 
 ** So let work on it for now. We'll try to fix this later or just leave it like that
 ** if we cannot figure it out. */
 
-document.querySelector("#check-button").addEventListener("click", function getInput() {
+document.querySelector("#check-button").addEventListener("click", function getInput() { // Though not need I preffered naming the function.
     let value = Number(document.querySelector("#input-number").value); // Get the value from the user
 
     if (value < 0 || value > 100) { // If the value is not in the range then display the message "Out of range"
@@ -100,11 +102,19 @@ document.querySelector("#check-button").addEventListener("click", function getIn
         document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // Update the previous score with the new score got from the guessGameDefault()
 
         if (value === number) {
-            highscore = getHighscore(msgAndScore[1]); // In case the number is guessed right then we update the highscore.
+            highscore = getHighscore(`${msgAndScore[1]}`); // In case the number is guessed right then we update the highscore.
             document.querySelector("#display-box-text").textContent = `${value}`;
-            effectOnPage();
+            effectOnPage("#20FFEB", "linear-gradient(to right top, #88f797, #f7f6ad)", "#000"); // set the function effectOnPage() just not to oveload the this getInput() function
+            disableCheckButton(); //Same as above
+        }
+
+        if (msgAndScore[1] === 0){
+            document.querySelector(".guess-indicator").textContent = "💥You've lost😥" ;
+            document.querySelector("#display-box-text").textContent = `${value}`;
+            effectOnPage("#FF77F3", "linear-gradient(to right top, #FFDF0F, #FF09CC)", "#fff");
             disableCheckButton();
         }
+
         document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // Replace the current highscore textContent with the new highscore.
     }
 
