@@ -84,8 +84,24 @@ function effectOnPage(displayBoxColor, bodyBackground, bodyColor) {
     document.querySelector("body").style.color = bodyColor;
 }
 
-document.getElementById("play-button").addEventListener("click", function resetPage() {
+//alternative way to reload the page but the highscore doesnt stay
+// function resetButton(){
+//     location.reload();
+// }
 
+//reset page 
+document.getElementById("play-button").addEventListener("click", function resetPage() {
+    console.log('game restarted!');
+    const number = generateNumber();
+    document.querySelector("#input-number").value = '';
+    document.querySelector("#display-box-text").textContent = '?';
+    document.querySelector(".guess-indicator").textContent = 'Waiting for a number...';
+    document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`
+    document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`;
+
+    function disableCheckButton(){
+        document.getElementById("#check-button").disabled = false; //checkbutton reactivate
+    }
 })
 
 /* Note for you guys: For now it seems that even if there is not input, the value = 0. 
@@ -129,13 +145,8 @@ document.querySelector("#check-button").addEventListener("click", function getIn
 
     /* The next step is to add the "Game lost!" and play again without changing the highscore unless the page 
     ** is refreshed. We need to use a method to reinitalize the targeted variables*/
-   
+
     // Also improving the UI.
-
-
-document.querySelector("#play-button").addEventListener("click", function() {
-    
-})
 
 
 
