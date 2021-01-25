@@ -106,3 +106,19 @@ body{
     border: lightblue;
     color: lightblue;
 }
+/* 
+.authors {
+} */
+
+.authors h3 {
+    margin-top: 1%;
+    width: 100%;
+}
+.authors p {
+    float: left;
+    width: 33%;
+    margin-top: -1%;
+    color: black;
+    font-weight: bold;
+
+}
