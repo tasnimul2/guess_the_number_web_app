@@ -91,7 +91,7 @@ document.querySelector("#check-button").addEventListener("click", function getIn
     let value = Number(document.querySelector("#input-number").value); // Get the value from the user
 
     if (value < 0 || value > 100) { // If the value is not in the range then display the message "Out of range"
-        document.querySelector(".guess-indicator").textContent = "Out of range!";
+        document.querySelector(".guess-indicator").textContent = "Out of range!👀";
     } else {
         msgAndScore = guessGameDefault(value, number, msgAndScore[1]); // the method return an array that contains the message and the score.
 
