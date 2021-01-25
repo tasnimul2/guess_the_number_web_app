@@ -96,10 +96,10 @@ document.getElementById("play-button").addEventListener("click", function resetP
     document.querySelector("#input-number").value = '';
     document.querySelector("#display-box-text").textContent = '?';
     document.querySelector(".guess-indicator").textContent = 'Waiting for a number...';
-    document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`
-    document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`;
+    document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // needs to be fixed
+    document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // this one works fine
 
-    function disableCheckButton(){
+    function disableCheckButton(){ //can't reactivate it.
         document.getElementById("#check-button").disabled = false; //checkbutton reactivate
     }
 })
