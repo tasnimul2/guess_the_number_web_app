@@ -83,25 +83,9 @@ function effectOnPage(displayBoxColor, bodyBackground, bodyColor) {
     document.querySelector("body").style.background = bodyBackground;
     document.querySelector("body").style.color = bodyColor;
 }
-
-//alternative way to reload the page but the highscore doesnt stay
-// function resetButton(){
-//     location.reload();
-// }
-
-//reset page 
+ 
 document.getElementById("play-button").addEventListener("click", function resetPage() {
-    console.log('game restarted!');
-    const number = generateNumber();
-    document.querySelector("#input-number").value = '';
-    document.querySelector("#display-box-text").textContent = '?';
-    document.querySelector(".guess-indicator").textContent = 'Waiting for a number...';
-    document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // needs to be fixed
-    document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // this one works fine
 
-    function disableCheckButton(){ //can't reactivate it.
-        document.getElementById("#check-button").disabled = false; //checkbutton reactivate
-    }
 })
 
 /* Note for you guys: For now it seems that even if there is not input, the value = 0. 
