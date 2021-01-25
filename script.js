@@ -99,6 +99,7 @@ document.getElementById("play-button").addEventListener("click", function resetP
     document.querySelector(".guess-indicator").textContent = 'Waiting for a number...';
     document.querySelector(".score").textContent = `${defaultTextScoreContent} ${msgAndScore[1]}`; // needs to be fixed
     document.querySelector(".highscore").textContent = `${defaultHighscoreContent} ${highscore}`; // this one works fine
+    effectOnPage('white','linear-gradient(to right top,#e588f7, #f7c3ad)','white');
 
    
 })
