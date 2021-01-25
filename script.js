@@ -110,10 +110,6 @@ document.querySelector("#check-button").addEventListener("click", function getIn
 
     /* The next step is to add the "Game lost!" and play again without changing the highscore unless the page 
     ** is refreshed. We need to use a method to reinitalize the targeted variables*/
-   
-    var someVarName = "highschore";
-    localStorage.setItem("someVarKey", someVarName);
-    console.log(someVarName)
 
 
     // Also improving the UI.
