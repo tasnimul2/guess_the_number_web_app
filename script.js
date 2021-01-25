@@ -95,7 +95,7 @@ document.querySelector("#check-button").addEventListener("click", function getIn
     } else {
         msgAndScore = guessGameDefault(value, number, msgAndScore[1]); // the method return an array that contains the message and the score.
 
-        console.log(msgAndScore[1]);
+        console.log(msgAndScore[1]); // displaying the currect score
 
         document.querySelector(".guess-indicator").textContent = msgAndScore[0]; // Replace the current guess indicator textContent with the message we got from the method guessGameDefault()
 
@@ -120,6 +120,7 @@ document.querySelector("#check-button").addEventListener("click", function getIn
 
     /* The next step is to add the "Game lost!" and play again without changing the highscore unless the page 
     ** is refreshed. We need to use a method to reinitalize the targeted variables*/
+
 
     // Also improving the UI.
 
